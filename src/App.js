@@ -17,7 +17,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_INVENTORY)
+			.get("https://my-cool-book-store.herokuapp.com/api/inventory")
 			.then(res => {
 				console.log("Axios received: ", res.data)
 				setProducts(res.data)
