@@ -12,15 +12,16 @@ import { CartContext } from './contexts/CartContext';
 import axios from 'axios';
 
 function App() {
-	const [products, setProducts] = useState(data);
+	const [products, setProducts] = useState([]);
 	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
 		axios
-			.get('https://my-cool-book-store.herokuapp.com/api/inventory')
+			.get(process.env.REACT_APP_INVENTORY)
 			.then(res => {
-				console.log("Axios received: ", res)
-				// setProducts(res.data)
+				console.log("Axios received: ", res.data)
+				setProducts(res.data)
+				console.log("updated products: ", products)
 			})
 			.catch(err => console.log(err))
 	}, [])
