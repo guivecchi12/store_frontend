@@ -115,11 +115,6 @@ const Login = () => {
                 </label>
 
                 <button disabled={buttonDisabled}>SUBMIT</button>
-
-                <div className="register">            
-                    <p>Not registered yet?</p>
-                    <Link to="/signup">Register Here</Link>
-                </div>
             </div>  
         </form>
     </div>
