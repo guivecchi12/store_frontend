@@ -23,6 +23,14 @@
 			border-radius: 100%;
 			width: 18px;
 			height: 18px;
+
+			@media (max-width: 491px){
+				top: -70%;
+				left: 100%;
+			}
+			@media (max-width: 471px){
+				margin-left: 5px;
+			}
 		}
 	}
 }
