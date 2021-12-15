@@ -1,9 +1,12 @@
 .shopping-cart {
 	display: block;
 	margin: 0 auto;
-	width: 1000px;
+	width: 80%;
 	background: white;
 	border-radius: 5px;
+	@media(min-width: 675px){
+		width:50%;
+	}
 
 	&__title {
 		font-size: 24px;
@@ -16,6 +19,13 @@
 		display: flex;
 		order: -2;
 		padding: 30px 0 0 30px;
+
+		@media(min-width: 675px){
+			padding-left:50px;
+		}
+		@media(max-width: 375px){
+			padding-left:10px;
+		}
 
 		img {
 			width: 100px;
@@ -40,6 +50,12 @@
 			margin: 10px 0;
 			color: lightcoral;
 			margin-left: 22px;
+
+			@media(max-width: 341px){
+				padding:5px;
+				margin: 0;
+				margin-left: 5px;
+			}
 
 			&:hover {
 				cursor: pointer;

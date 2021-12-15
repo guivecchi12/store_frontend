@@ -10,7 +10,7 @@ const Navigation = () => {
 			<NavLink to="/cart">
 				Cart <span>{cart.length}</span>
 			</NavLink>
-			<NavLink to="/login">Login</NavLink>
+			<NavLink to="/login" className={"a_login"}>Login</NavLink>
 		</div>
 	);
 };

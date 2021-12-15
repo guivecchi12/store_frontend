@@ -1,21 +1,35 @@
 .navigation {
+	width:100%;
 	display: flex;
+	align-items: center;
 	justify-content: flex-end;
-	padding: 0 100px;
+	padding-right: 50%;
 	transition: 0.2s ease-in;
 	margin-bottom: 40px;
-
 	background: #141618;
+
+	@media(max-width: 450px){
+		justify-content: center;
+	}
+
+	.a_login{
+		margin-right:5%;
+	}
+
 	a {
 		color: white;
 		text-decoration: none;
 		padding: 30px 20px;
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+
+		
 
 		span {
 			display: inline-block;
 			position: relative;
-			top: -8px;
-			left: 0px;
+			bottom: 8px;
 			font-weight: bold;
 			line-height: 18px;
 			text-align: center;
@@ -23,14 +37,7 @@
 			border-radius: 100%;
 			width: 18px;
 			height: 18px;
-
-			@media (max-width: 491px){
-				top: -70%;
-				left: 100%;
-			}
-			@media (max-width: 471px){
-				margin-left: 5px;
-			}
+			margin-left: 5px;
 		}
 	}
 }
