@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import data from './data';
 
 // Components
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import Login from './components/Login';
+import OrderConfirmation from './components/OrderConfirmation';
 import { ProductContext } from "./contexts/ProductContext";
 import { CartContext } from './contexts/CartContext';
 import axios from 'axios';
@@ -19,9 +19,7 @@ function App() {
 		axios
 			.get("https://my-cool-book-store.herokuapp.com/api/inventory")
 			.then(res => {
-				console.log("Axios received: ", res.data)
 				setProducts(res.data)
-				console.log("updated products: ", products)
 			})
 			.catch(err => console.log(err))
 	}, [])
@@ -48,6 +46,7 @@ function App() {
 					<Route exact path="/" element={<Products />}/>
 					<Route path="/cart" element={<ShoppingCart />}/>
 					<Route path="/login" element={<Login />}/>
+					<Route path='/confirmation' element={<OrderConfirmation/>}/>
 				</Routes>
 			</CartContext.Provider>
 		</ProductContext.Provider>

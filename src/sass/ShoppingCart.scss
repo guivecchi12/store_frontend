@@ -84,8 +84,10 @@
 			color: white;
 
 			&:hover {
-				background: black;
-				color: white;
+				background: white;
+				color: black;
+				box-shadow: 0 4px 8px 0 rgba(250, 249, 249, 0.425), 0 6px 20px 0 rgba(250, 249, 249, 0.425);
+				cursor: pointer;
 			}
 		}
 	}

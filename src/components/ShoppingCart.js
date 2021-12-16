@@ -1,17 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
+import { useNavigate } from "react-router-dom";
 
 // Components
 import Item from './ShoppingCartItem';
 
 const ShoppingCart = () => {
 	const cart = useContext(CartContext);
+	const navigate = useNavigate();
+	const [total, setTotal] = useState(0)
 
-	const getCartTotal = () => {
-		return cart.reduce((acc, value) => {
+	useEffect(() => {
+		setTotal(cart.reduce((acc, value) => {
 			return acc + value.price;
-		}, 0).toFixed(2);
-	};
+		}, 0).toFixed(2))
+	}, [cart])
+
+
+	const submit = () => {
+		if(cart.length > 0){
+			navigate('/confirmation', {state:[total, cart]});
+		}
+	}
 
 	return (
 		<div className="shopping-cart">
@@ -20,8 +30,8 @@ const ShoppingCart = () => {
 			))}
 
 			<div className="shopping-cart__checkout">
-				<p>Total: ${getCartTotal()}</p>
-				<button>Checkout</button>
+				<p>Total: ${total}</p>
+				<button onClick={submit}>Checkout</button>
 			</div>
 		</div>
 	);
