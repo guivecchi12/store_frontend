@@ -18,7 +18,7 @@ const OrderConfirmation = () => {
             return(
                 <div className='confirmationItems'>
                     <p><span className='orderBold'>Product: </span>{item.title}</p>
-                    <p><span className='orderBold'>Price: </span>{item.price}</p>
+                    <p><span className='orderBold'>Price: </span>${item.price.toFixed(2)}</p>
                 </div>
             )
         });
@@ -33,15 +33,15 @@ const OrderConfirmation = () => {
                         <h3>Order Summary</h3>
                         <div className='orderFlex'>
                             <p><span className='orderBold'>Product Cost:</span></p>
-                            <p>{total}</p>
+                            <p>$ {total}</p>
                         </div>
                         <div className='orderFlex'>
                             <p><span className='orderBold'>Taxes: </span></p>
-                            <p>{salesTax()}</p>
+                            <p>$ {salesTax()}</p>
                         </div>
                         <div className='orderFlex'>
                             <p><span className='orderBold'>Total: </span></p>
-                            <p>{totalPurchase()}</p>
+                            <p>$ {totalPurchase()}</p>
                         </div>
                     </div>
 
