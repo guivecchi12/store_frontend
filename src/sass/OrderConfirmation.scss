@@ -68,7 +68,7 @@
         }
 
         .orderSummary{
-            width: 15%;    
+            width: 20%;    
             display: flex;
             flex-direction: column;
             align-self: flex-start;
@@ -96,7 +96,7 @@
             border-width: 2px;
             border-style: dashed;
             border-color: lightcoral;
-            margin: 0 100px;
+            margin: 0 50px;
             
             @media(max-width:740px){
                 height:auto;
@@ -107,7 +107,7 @@
         }
 
         .orderItems{
-            width: 20%;
+            width: 40%;
             align-self: flex-start;
 
             @media(max-width: 740px){
@@ -125,10 +125,11 @@
                 width:100%;
                 display:flex;
                 justify-content: space-between;
+                margin-top: 15px;
 
                 @media(max-width: 740px){
                     width:95%;
-                    margin-top: 15px;
+                    margin-left:1%;
                 }
 
                 .orderBold{
