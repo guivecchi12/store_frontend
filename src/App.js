@@ -20,6 +20,7 @@ function App() {
 			.get("https://my-cool-book-store.herokuapp.com/api/inventory")
 			.then(res => {
 				setProducts(res.data)
+				console.log(products)
 			})
 			.catch(err => console.log(err))
 	}, [])
