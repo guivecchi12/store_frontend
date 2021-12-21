@@ -24,7 +24,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get("https://my-cool-book-store.herokuapp.com/api/inventory")
+			.get("/api/inventory")
 			.then(res => {
 				setProducts(res.data)
 			})
@@ -50,7 +50,7 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("https://my-cool-book-store.herokuapp.com/api/user/logout")
+			.get("/api/user/logout")
 			.then(res => {
 				console.log("logged out");
 				setUser([])
