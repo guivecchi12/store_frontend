@@ -46,12 +46,10 @@ const Login = () => {
     e.preventDefault();
 
     let loginAttempt = { username: formState.username, password: formState.password };
-    console.log(formState)
     
     axios
       .post("/api/user/login", loginAttempt)
       .then((res) => {
-        console.log("MY DATA:", res.data)
         const data = res.data;
 
         localStorage.setItem("token", data.token);
@@ -60,7 +58,6 @@ const Login = () => {
         setUser(localStorage.getItem("name"));
         navigate("/");
 
-        console.log("Form Submitted");
         // to reset form
         setFormState({
           username: "",
@@ -69,8 +66,7 @@ const Login = () => {
         }) 
       })
 
-      .catch((err) => {
-        console.log("This is the Error", err);
+      .catch(() => {
         setErrors({...errors, message: "Incorect Login Information"})
       });
       
