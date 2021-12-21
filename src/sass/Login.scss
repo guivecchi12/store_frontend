@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
 
-
+    
     .form{
         height:80%;
         padding: 20px;
@@ -19,21 +19,33 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        align-items: center;    
-    }
+        align-items: center;
 
-    h1{
-        font-size: 2em;
-    }
-
-    .userInfo{
-        height:60%;
-        display:flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+        .errorMessage{
+            color:red;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+        
+        h1{
+            font-size: 2em;
+        }
     
-    input{
-       margin-left: 5px; 
-    }
+        .userInfo{
+            height:60%;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .terms{
+                button{
+                    margin-left: 20px;
+                }
+            }
+        }
+        
+        input{
+           margin-left: 5px; 
+        }
+    }    
 }

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-// import axiosWithAuth from "../utilities/axiosWithAuth";
-// import { useHistory } from "react-router-dom";
-// import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 import Popup from 'reactjs-popup';
+import axios from "axios";
+import * as Yup from 'yup';
+import { UserContext } from '../contexts/UserContext'
+
 
 const Login = () => {
-//   const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  //this is the react state
   const defaultState = {
     username: "",
     password: "",
@@ -16,47 +17,101 @@ const Login = () => {
   };
 
   const [formState, setFormState] = useState(defaultState);
-  const [errors, setErrors] = useState({ ...defaultState });
+  const [errors, setErrors] = useState({ ...defaultState, message:'' });
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  // const { push } = useHistory();
 
 
+  let formSchema = Yup.object().shape({
+    username: Yup.string().required("Please provide username."),
+    password: Yup.string().required("Please enter a correct Password"),
+    terms: Yup.boolean().oneOf(
+      [true],
+      "Please agree to the terms and conditions"
+    ),
+  });
+
+
+  // disable button until all fields are filled
   useEffect(() => {
-    // disable button until all fields are filled
-    setButtonDisabled(!formState.terms);
-  }, [formState.terms]);
+    if(formState.username.length > 0 & formState.password.length > 0){
+      setButtonDisabled(!formState.terms);
+    }
+    else{
+      setButtonDisabled(true);
+    }
+  }, [formState]);
 
   //this is use for the onsubmit function
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
 
-    // to reset form
-    setFormState({
-      username: "",
-      password: "",
-      terms: false,
-    });
+    let loginAttempt = { username: formState.username, password: formState.password };
+    console.log(formState)
+    
+    axios
+      .post("https://my-cool-book-store.herokuapp.com/api/user/login", loginAttempt)
+      .then((res) => {
+        console.log("MY DATA:", res.data)
+        const data = res.data;
 
-    // let user = { username: formState.username, password: formState.password };
-    // axiosWithAuth()
-    //   .post("/auth/login", user)
-    //   .then((res) => {
-    //     const data = res.data;
-    //     // console.log("form submitted success", data);
-    //     localStorage.setItem("token", data.token);
-    //     localStorage.setItem("userID", data.id);
-    //     //I set setUser here so it can retrieve the user data to the DOM
-    //     setUser(data);
-    //     push("/protected");
-    //   })
-    //   .catch((err) => {
-    //     console.log("This is the Error", err);
-    //   });
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", data.name);
+        
+        setUser(localStorage.getItem("name"));
+        navigate("/");
+
+        console.log("Form Submitted");
+        // to reset form
+        setFormState({
+          username: "",
+          password: "",
+          terms: false,
+        }) 
+      })
+
+      .catch((err) => {
+        console.log("This is the Error", err);
+        setErrors({...errors, message: "Incorect Login Information"})
+      });
+      
   };
 
   const validateChange = (e) => {
     e.persist();
+
+    if(e.target.type === "checkbox"){
+      Yup.reach(formSchema, e.target.name)
+        .validate(e.target.checked)
+        .then(() =>
+          setErrors({
+            ...errors,
+            [e.target.name]: "",
+          })
+        )
+        .catch((error) =>
+          setErrors({
+            ...errors,
+            [e.target.name]: error.errors[0],
+          })
+        );
+    }
+
+    else{
+      Yup.reach(formSchema, e.target.name)
+        .validate(e.target.value)
+        .then(() =>
+          setErrors({
+            ...errors,
+            [e.target.name]: "",
+          })
+        )
+        .catch((error) =>
+          setErrors({
+            ...errors,
+            [e.target.name]: error.errors[0],
+          })
+        );
+    }
   };
 
   // onChange function
@@ -74,6 +129,7 @@ const Login = () => {
     <div className="login">
         <form onSubmit={formSubmit} className="form">
             <h1>LOG IN</h1>
+            {errors.message.length > 0 ? <div className="errorMessage">{errors.message}</div> : null}
             <div className="userInfo">
                 <label htmlFor="username">
                     Username
@@ -104,7 +160,7 @@ const Login = () => {
                     )}
                 </label>
                 <label className="terms" htmlFor="terms">
-                    <input name="terms" type="checkbox" onChange={handleChange} />
+                    <input name="terms" type="checkbox" onChange={handleChange}/>
                     <Popup 
                       trigger={<button> Terms of Service </button>} 
                       modal
