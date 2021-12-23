@@ -15,16 +15,16 @@ import Login from './components/Login';
 import OrderConfirmation from './components/OrderConfirmation'
 
 
-
-
 function App() {
 	const [products, setProducts] = useState([])
 	const [cart, setCart] = useState([])
 	const [user, setUser] = useState([])
 
+	const api = process.env.REACT_APP_API || ''
+
 	useEffect(() => {
 		axios
-			.get("/api/inventory")
+			.get(api + "/api/inventory")
 			.then(res => {
 				setProducts(res.data)
 			})
@@ -50,9 +50,9 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("/api/user/logout")
-			.then(res => {
-				console.log("logged out");
+			.get(api + "/api/user/logout")
+			.then((res) => {
+				console.log(res)
 				setUser([])
 			})
 			.catch(err => console.log(err))
