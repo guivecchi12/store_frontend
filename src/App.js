@@ -13,8 +13,7 @@ import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import Login from './components/Login';
 import OrderConfirmation from './components/OrderConfirmation'
-
-
+import { date } from 'yup';
 
 
 function App() {
@@ -22,25 +21,27 @@ function App() {
 	const [cart, setCart] = useState([])
 	const [user, setUser] = useState([])
 
+	const api = process.env.REACT_APP_API || ''
+
 	useEffect(() => {
 		axios
-			.get("/api/inventory")
+			.get(api + "/api/inventory")
 			.then(res => {
 				setProducts(res.data)
 			})
 			.catch(err => console.log(err))
 	}, [])
 
-	// add the given item to the cart
 	const addItem = item => {
-		if(!cart.includes(item)){
-			setCart(oldCart => [...oldCart, item]);
-		}
+		item = {...item, my_key: Date.now()}
+		setCart(oldCart => [...oldCart, item]);
 	};
 	
 	// remove item from cart
 	const removeItem = item => {
-		setCart(cart.filter(items => items.id !== item.id));
+		console.log("MY Cart Before: ", cart)
+		setCart(cart.filter(items => items.my_key !== item.my_key));
+		console.log("MY Cart After: ", cart)
 	};
 
 	// clear cart
@@ -50,9 +51,9 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("/api/user/logout")
-			.then(res => {
-				console.log("logged out");
+			.get(api + "/api/user/logout")
+			.then((res) => {
+				console.log(res)
 				setUser([])
 			})
 			.catch(err => console.log(err))
