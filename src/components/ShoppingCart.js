@@ -11,7 +11,7 @@ const ShoppingCart = () => {
 	const cart = useContext(CartContext)
 	const { clearCart } = useContext(ProductContext)
 
-	const api = process.env.REACT_APP_API || ''
+	// const api = process.env.REACT_APP_API || ''
 
 	const navigate = useNavigate()
 	const [total, setTotal] = useState(0)
@@ -34,7 +34,7 @@ const ShoppingCart = () => {
 
 		// create order
 		axios
-			.post(api + '/api/order', my_order)
+			.post('/api/order', my_order)
 			.then(res => {
 				setOrder(res.data[0])
 			})
@@ -49,7 +49,7 @@ const ShoppingCart = () => {
 			}
 			console.log("ITEM ", ordered_item)
 			axios
-				.post(api + '/api/ordered_item', ordered_item)
+				.post('/api/ordered_item', ordered_item)
 				.then(res => console.log(res.data))
 				.catch(err => console.log(err))
 		})

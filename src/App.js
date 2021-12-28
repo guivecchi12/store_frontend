@@ -22,18 +22,18 @@ function App() {
 	const [user, setUser] = useState([])
 	const [error, setError] = useState()
 
-	const api = process.env.REACT_APP_API || ''
+	// const api = process.env.REACT_APP_API || ''
 
 	useEffect(() => {
 		axios
-			.get(api + "/api/inventory/")
+			.get("/api/inventory/")
 			.then(res => {
 				setProducts(res.data)
 			})
 			.catch(() => {
 				setError("Error when loading books")
 			})
-	}, [api])
+	}, [])
 
 	const addItem = item => {
 		item = {...item, my_key: Date.now()}
@@ -52,7 +52,7 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get(api + "/api/user/logout")
+			.get("/api/user/logout")
 			.then(() => {
 				setUser([])
 			})

@@ -5,13 +5,13 @@ const Orders = () => {
     const [orders, setOrders] = useState([])
     const [error, setError] = useState({})
 
-    const api = process.env.REACT_APP_API || ''
+    // const api = process.env.REACT_APP_API || ''
 
     
 
     useEffect(() => {
 		axios
-			.get(api + '/api/ordered_item/user')
+			.get('/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
                 console.log("*** ORDERS ***", orders)
