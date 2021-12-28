@@ -10,16 +10,16 @@ const Orders = () => {
     
 
     useEffect(() => {
-		// axios
-		// 	.get(api + '/api/ordered_item/user')
-        //     .then(res => {
-        //         setOrders(organizeOrders(res.data))
-        //         console.log("*** ORDERS ***", orders)
-        //     })
-        //     .catch(err => {
-        //         setError({error: err, message: 'unable to find orders'})
-        //     })
-        organizeOrders(data)
+		axios
+			.get(api + '/api/ordered_item/user')
+            .then(res => {
+                organizeOrders(res.data)
+                console.log("*** ORDERS ***", orders)
+            })
+            .catch(err => {
+                setError({error: err, message: 'No orders have been found'})
+            })
+        // organizeOrders(data)
 	}, [])
 
     const organizeOrders = (data) => {
@@ -37,35 +37,7 @@ const Orders = () => {
         setOrders(organized)
     }
 
-    // const mapOrder = (order) => {
-    //     orders[order].map(item => {
-    //         return (
-    //             <div className='item'>
-    //                 <h3>Title: {item.title}</h3>
-    //                 <h3>Price: ${item.unit_price.toFixed(2)}</h3>
-    //                 <h3>Quantity: {item.quantity}</h3>
-    //             </div>
-    //         )
-    //     })
-    // }
-    // const ordersDrill = () => {  
-    //     return {
-    //         for(var order in orders){
-    //             console.log(`Order ${order}: `, orders[order][0])
-    //             return(
-    //                 <div className='order'>
-    //                     {mapOrder(order)}
-    //                     <div className='order_info'>
-    //                         <h3>Total: ${orders[order][0].total_cost.toFixed(2)}</h3>
-    //                         <h3>Date Ordered: {orders[order][0].order_date}</h3>
-    //                         <h3>{orders[order][0].paid? "Status: Shipping" : "Status: Awaiting payment"}</h3>
-    //                     </div>
-    //                 </div>
-    //             )
-    //         }
-    //     }
-        
-    // }
+    
     const ordersDrill = () => {
         return(
             Object.keys(orders).map(order => {
@@ -94,7 +66,7 @@ const Orders = () => {
     }
     const displayOrders = () => {
         const size = Object.keys(orders).length
-        return( size > 0 ? ordersDrill() : <h3 className='no_orders'>No orders have been made</h3> )
+        return( size > 0 ? ordersDrill() : <h3 className='no_orders'>{error.message}</h3> )
     }
 
 
