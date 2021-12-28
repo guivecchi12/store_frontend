@@ -38,7 +38,7 @@ const ShoppingCart = () => {
 			.post('/api/order', my_order)
 			.then(res => {
 				setOrder(res.data[0])
-				console.log(res.data[0], res.data)
+				console.log("Data[0]: ", res.data[0], "\nData: ", res.data)
 				console.log(order)
 			})
 			.catch(err => console.log(err))	
