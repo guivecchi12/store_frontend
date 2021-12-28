@@ -37,6 +37,7 @@ const ShoppingCart = () => {
 		axios
 			.post('/api/order', my_order)
 			.then(res => {
+				console.log("RES: ", res)
 				setOrder(res.data[0])
 				console.log("Data[0]: ", res.data[0], "\nData: ", res.data)
 				console.log(order)
