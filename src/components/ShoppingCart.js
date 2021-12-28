@@ -31,22 +31,15 @@ const ShoppingCart = () => {
 			"paid": true
 		}
 
-		console.log("MY Order: ", my_order)
 		// create order
 		axios
 			.post('/api/order', my_order)
 			.then(res => {
-				console.log("RES: ", res)
 				setOrder(res.data[0])
-				console.log("Data[0]: ", res.data[0], "\nData: ", res.data)
-				console.log(order)
 			})
 			.catch(err => console.log(err))	
-		
-		console.log("ORDER: ", order)
-	}, [cart, order, total])
+	}, [cart, total])
 
-	// Create new order
 	
 	const addItems = () => {
 		cart.forEach(item => {

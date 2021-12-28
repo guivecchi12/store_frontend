@@ -12,10 +12,12 @@
         font-size: 1.2em;
     }
     .orders{
+        margin:10px;
         display: flex;
         flex-wrap: wrap;
         text-align: start;
-        justify-content: space-around;
+        justify-content: space-between;
+        
     }
     .order{
         width: 30%;
