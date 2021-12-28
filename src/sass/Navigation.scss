@@ -36,30 +36,20 @@
 	}
 
 	.userName{
-		width: 25%;
+		width: 70%;
 		font-weight: 900;
-		padding-right: 50%;
+		color: white;
+		justify-self: left;
 
-		@media(max-width: 904px){
-			padding-right:30%;
-		}
-
-		@media(max-width: 630px){
-			padding-right: 10%;
-		}
-
-		@media(max-width: 476px){
-			padding-right: 20px;
+		@media(max-width: 1594px){
+			padding-left:20px;
 		}
 
 		@media(max-width: 451px){
-			display:none
+			display: none;
 		}
 	}
 
-	.userName:hover{
-		cursor: inherit;
-	}
 
 	a.cart {
 		display: flex;
