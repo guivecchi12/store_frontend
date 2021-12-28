@@ -31,6 +31,7 @@ const ShoppingCart = () => {
 			"paid": true
 		}
 
+		console.log("MY Order: ", my_order)
 		// create order
 		axios
 			.post('/api/order', my_order)
@@ -42,7 +43,7 @@ const ShoppingCart = () => {
 			})
 			.catch(err => console.log(err))	
 		
-
+		console.log("ORDER: ", order)
 	}, [cart, order, total])
 
 	// Create new order
