@@ -1,0 +1,44 @@
+.order_history{
+    padding-top: 100px;
+    text-align: center;
+    h1{
+        font-size: xx-large;
+    }
+    h3{
+        font-size: large;
+    }
+    .no_orders{
+        margin-top:10%;
+        font-size: 1.2em;
+    }
+    .orders{
+        display: flex;
+        text-align: start;
+        justify-content: space-around;
+    }
+    .order{
+        width: 30%;
+        padding: 10px;
+        margin-top: 20px;
+        border: 1px solid black;
+        #order_num{
+            font-style: italic;
+            font-size: 1.2em;
+            border-bottom: 1px solid black;
+        }
+    }
+    .order_info{
+        margin-top: 10px;
+        font-weight: bold;
+        h3{
+            margin-top: 10px;
+        }
+    }
+    .item{
+        margin-top: 15px;
+        h3{
+            padding-bottom: 8px;
+        }
+        border-bottom: 1px dashed black;
+    }
+}

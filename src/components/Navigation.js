@@ -9,7 +9,8 @@ const Navigation = () => {
 
 	return (
 		<div className="navigation">
-			<NavLink to='' className='userName'>{user}</NavLink>
+			<div className='userName'>{user}</div>
+			<NavLink to='/orders'>Orders</NavLink>
 			<NavLink to="/">Products</NavLink>
 			<NavLink to="/cart" className={'cart'}>
 				Cart <span>{cart.length}</span>

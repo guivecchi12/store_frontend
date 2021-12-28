@@ -42,24 +42,24 @@ const Login = () => {
     }
   }, [formState]);
 
-  //this is use for the onsubmit function
   const formSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    let loginAttempt = { username: formState.username, password: formState.password };
+    let loginAttempt = { username: formState.username, password: formState.password }
     
     axios
       .post(api + "/api/user/login", loginAttempt)
       .then((res) => {
-        const data = res.data;
+        const data = res.data
+        console.log("DATA: ", data)
 
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("name", data.name);
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("name", data.name)
+        localStorage.setItem("userID", data.userID)
         
-        setUser(localStorage.getItem("name"));
-        navigate("/");
+        setUser(localStorage.getItem("name"))
+        navigate("/")
 
-        // to reset form
         setFormState(defaultState) 
       })
 
@@ -108,9 +108,7 @@ const Login = () => {
     }
   };
 
-  // onChange function
   const handleChange = (e) => {
-    //ternary operator to determine the form value
     const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormState({
       ...formState,
