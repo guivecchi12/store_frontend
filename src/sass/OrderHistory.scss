@@ -15,14 +15,13 @@
         margin:20px;
         display: flex;
         flex-wrap: wrap;
-        text-align: start;
-        justify-content: space-between;
-        
+        text-align: start;        
     }
     .order{
         width: 30%;
         padding: 10px;
-        margin-top: 20px;
+        margin: 20px;
+
         border: 1px solid black;
         #order_num{
             font-style: italic;
