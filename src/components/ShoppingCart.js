@@ -21,6 +21,7 @@ const ShoppingCart = () => {
 		setTotal(cart.reduce((acc, value) => {
 			return acc + value.price;
 		}, 0).toFixed(2))
+		newOrder()
 	}, [cart])
 
 	// Create new order
@@ -39,11 +40,10 @@ const ShoppingCart = () => {
 				setOrder(res.data[0])
 				console.log(res.data[0], res.data)
 				console.log(order)
-				addItem()
 			})
 			.catch(err => console.log(err))	
 	}
-	const addItem = () => {
+	const addItems = () => {
 		cart.forEach(item => {
 			
 			const ordered_item = {
@@ -64,7 +64,7 @@ const ShoppingCart = () => {
 			const t = total
 			const c = cart
 
-			newOrder()
+			addItems()
 			clearCart()
 			navigate('/confirmation', {state:[t, c]})
 		}
