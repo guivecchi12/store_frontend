@@ -15,7 +15,7 @@ const ShoppingCart = () => {
 
 	const navigate = useNavigate()
 	const [total, setTotal] = useState(0)
-	const [order, setOrder] = useState(1)
+	const [order, setOrder] = useState()
 
 	useEffect(() => {
 		setTotal(cart.reduce((acc, value) => {
@@ -47,7 +47,7 @@ const ShoppingCart = () => {
 				"inventory_sku": item.id,
 				"quantity_ordered": 1
 			}
-			console.log("ITEM ", ordered_item)
+			// console.log("ITEM ", ordered_item)
 			axios
 				.post('/api/ordered_item', ordered_item)
 				.then(res => console.log(res.data))
