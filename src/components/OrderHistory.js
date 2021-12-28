@@ -14,7 +14,7 @@ const Orders = () => {
 			.get('/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
-                console.log("*** ORDERS ***", orders)
+                // console.log("*** ORDERS ***", orders)
             })
             .catch(err => {
                 setError({error: err, message: 'No orders have been found'})

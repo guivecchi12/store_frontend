@@ -51,7 +51,6 @@ const Login = () => {
       .post("/api/user/login", loginAttempt)
       .then((res) => {
         const data = res.data
-        console.log("DATA: ", data)
 
         localStorage.setItem("token", data.token)
         localStorage.setItem("name", data.name)
