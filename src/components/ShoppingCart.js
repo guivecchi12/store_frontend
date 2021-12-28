@@ -17,15 +17,13 @@ const ShoppingCart = () => {
 	const [total, setTotal] = useState(0)
 	const [order, setOrder] = useState()
 
+	
 	useEffect(() => {
 		setTotal(cart.reduce((acc, value) => {
 			return acc + value.price;
 		}, 0).toFixed(2))
-		newOrder()
-	}, [cart])
-
-	// Create new order
-	const newOrder = () => {
+		
+		
 		const userID = localStorage.getItem('userID') || 1
 		const my_order = {
 			"userID": userID,
@@ -43,7 +41,12 @@ const ShoppingCart = () => {
 				console.log(order)
 			})
 			.catch(err => console.log(err))	
-	}
+		
+
+	}, [cart, order, total])
+
+	// Create new order
+	
 	const addItems = () => {
 		cart.forEach(item => {
 			
