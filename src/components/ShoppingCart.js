@@ -37,6 +37,7 @@ const ShoppingCart = () => {
 			.post('/api/order', my_order)
 			.then(res => {
 				setOrder(res.data[0])
+				console.log(res.data[0], res.data)
 				console.log(order)
 				addItem()
 			})
@@ -44,6 +45,7 @@ const ShoppingCart = () => {
 	}
 	const addItem = () => {
 		cart.forEach(item => {
+			
 			const ordered_item = {
 				"order": order,
 				"inventory_sku": item.id,
@@ -51,7 +53,7 @@ const ShoppingCart = () => {
 			}
 
 			axios
-				.post('/api/ordered_item', ordered_item)
+				.post('/api/ordered_item/', ordered_item)
 				.then(res => console.log(res.data))
 				.catch(err => console.log(err))
 		})

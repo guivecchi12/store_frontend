@@ -55,6 +55,7 @@ function App() {
 			.get("/api/user/logout")
 			.then(() => {
 				setUser([])
+				localStorage.clear()
 			})
 			.catch(() => {
 				setError('Error during logout, please re-load and try again')
