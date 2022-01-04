@@ -28,7 +28,7 @@ const OrderConfirmation = () => {
         }
 
         await axios
-            .post('http://localhost:3001/api/order', my_order)
+            .post('/api/order', my_order)
             .then(async (res) => {
                 setOrder(res.data[0])
             })
@@ -36,7 +36,6 @@ const OrderConfirmation = () => {
     }
 
     const addItems = async () => {
-
         if(order){
             items.forEach(item => {
 			
@@ -47,7 +46,7 @@ const OrderConfirmation = () => {
                 }
     
                 axios
-                    .post('http://localhost:3001/api/ordered_item/', ordered_item)
+                    .post('/api/ordered_item/', ordered_item)
                     .then(res => console.log(res.data))
                     .catch(err => console.log(err))
             })

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 // Context
@@ -23,9 +24,11 @@ function App() {
 	const [error, setError] = useState()
 	const [loggedIn, setLoggedIn] = useState(false)
 
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		axios
-			.get("http://localhost:3001/api/inventory/")
+			.get("/api/inventory/")
 			.then(res => {
 				setProducts(res.data)
 				setError()
@@ -52,12 +55,13 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("http://localhost:3001/api/user/logout")
+			.get("/api/user/logout")
 			.then(() => {
 				setUser([])
 				localStorage.clear()
 				setError()
 				setLoggedIn(false)
+				navigate("/")
 			})
 			.catch(() => {
 				setError('Error during logout, please re-load and try again')

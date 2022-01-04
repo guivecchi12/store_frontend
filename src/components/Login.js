@@ -47,7 +47,7 @@ const Login = () => {
     let loginAttempt = { username: formState.username, password: formState.password }
     
     axios
-      .post("http://localhost:3001/api/user/login", loginAttempt)
+      .post("/api/user/login", loginAttempt)
       .then((res) => {
         const data = res.data
 

@@ -10,7 +10,7 @@ const Orders = () => {
     useEffect(() => {
         if(loggedIn){
             axios
-			.get('http://localhost:3001/api/ordered_item/user')
+			.get('/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
                 setError({})
