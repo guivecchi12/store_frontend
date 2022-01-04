@@ -7,8 +7,8 @@ import { UserContext } from '../contexts/UserContext'
 
 
 const Login = () => {
-  const { setUser, setLoggedIn } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { setUser, setLoggedIn } = useContext(UserContext)
+  const navigate = useNavigate()
   const api = process.env.REACT_APP_API || ''
 
   const defaultState = {
@@ -48,7 +48,7 @@ const Login = () => {
     let loginAttempt = { username: formState.username, password: formState.password }
     
     axios
-      .post(api + "/api/user/login", loginAttempt)
+      .post("/api/user/login", loginAttempt)
       .then((res) => {
         const data = res.data
 

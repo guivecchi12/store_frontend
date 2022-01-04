@@ -27,7 +27,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get(api + "/api/inventory/")
+			.get("/api/inventory/")
 			.then(res => {
 				setProducts(res.data)
 				setError()
@@ -54,7 +54,7 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get(api + "/api/user/logout")
+			.get("/api/user/logout")
 			.then(() => {
 				setUser([{status:"off"}])
 				localStorage.clear()

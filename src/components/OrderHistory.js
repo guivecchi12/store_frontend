@@ -7,12 +7,11 @@ const Orders = () => {
     const [error, setError] = useState({})
     const { loggedIn } = useContext(UserContext);
 
-    const api = process.env.REACT_APP_API || ''
-
+    // const api = process.env.REACT_APP_API || ''
     useEffect(() => {
         if(loggedIn){
             axios
-			.get(api + '/api/ordered_item/user')
+			.get('/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
                 setError({})
