@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 
 import { CartContext } from '../contexts/CartContext'
@@ -9,8 +8,6 @@ import Item from './ShoppingCartItem'
 
 const ShoppingCart = () => {
 	const cart = useContext(CartContext)
-
-	// const api = process.env.REACT_APP_API || ''
 
 	const navigate = useNavigate()
 	const [total, setTotal] = useState(0)

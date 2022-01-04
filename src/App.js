@@ -23,11 +23,9 @@ function App() {
 	const [error, setError] = useState()
 	const [loggedIn, setLoggedIn] = useState(false)
 
-	const api = process.env.REACT_APP_API || ''
-
 	useEffect(() => {
 		axios
-			.get("/api/inventory/")
+			.get("http://localhost:3001/api/inventory/")
 			.then(res => {
 				setProducts(res.data)
 				setError()
@@ -54,9 +52,9 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("/api/user/logout")
+			.get("http://localhost:3001/api/user/logout")
 			.then(() => {
-				setUser([{status:"off"}])
+				setUser([])
 				localStorage.clear()
 				setError()
 				setLoggedIn(false)

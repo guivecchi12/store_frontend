@@ -11,39 +11,48 @@ const OrderConfirmation = () => {
 
     useEffect(() => {
         createOrder()
-        addItems()
-        clearCart()
     }, [])
 
-    const createOrder = () => {
-        const userID = localStorage.getItem('userID') || 1
-		const my_order = {
-			"userID": userID,
-			"total_cost": total,
-			"paid": true
-		}
+    useEffect(() => {
+        addItems()
+        clearCart()
+    },[order])
 
-        axios
-            .post('/api/order', my_order)
-            .then(res => {
+    const createOrder = async () => {
+        const userID = localStorage.getItem('userID') || 1
+
+        const my_order = {
+            "userID": userID,
+            "total_cost": total,
+            "paid": true
+        }
+
+        await axios
+            .post('http://localhost:3001/api/order', my_order)
+            .then(async (res) => {
                 setOrder(res.data[0])
             })
             .catch(err => console.log(err))
     }
-    const addItems = () => {
-		items.forEach(item => {
-			
-			const ordered_item = {
-				"order": order,
-				"inventory_sku": item.id,
-				"quantity_ordered": 1
-			}
 
-			axios
-				.post('/api/ordered_item/', ordered_item)
-				.then(res => console.log(res.data))
-				.catch(err => console.log(err))
-		})
+    const addItems = async () => {
+
+        if(order){
+            items.forEach(item => {
+			
+                const ordered_item = {
+                    "order": order,
+                    "inventory_sku": item.id,
+                    "quantity_ordered": 1
+                }
+    
+                axios
+                    .post('http://localhost:3001/api/ordered_item/', ordered_item)
+                    .then(res => console.log(res.data))
+                    .catch(err => console.log(err))
+            })
+        }
+		
 	}
 
     const salesTax = () => {

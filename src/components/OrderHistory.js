@@ -7,17 +7,17 @@ const Orders = () => {
     const [error, setError] = useState({})
     const { loggedIn } = useContext(UserContext);
 
-    // const api = process.env.REACT_APP_API || ''
     useEffect(() => {
         if(loggedIn){
             axios
-			.get('/api/ordered_item/user')
+			.get('http://localhost:3001/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
                 setError({})
             })
             .catch(err => {
                 setError({error: err, message: 'No orders have been found'})
+                console.log("Error while getting your orders: ", error)
             })
         }
         else{
