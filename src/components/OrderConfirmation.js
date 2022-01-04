@@ -1,9 +1,50 @@
-import React from 'react';
-import { useLocation } from 'react-router';
+import React, { useEffect, useState, useContext } from 'react'
+import { useLocation } from 'react-router'
+import axios from 'axios'
+import { ProductContext } from '../contexts/ProductContext'
 
 const OrderConfirmation = () => {
-    const total = useLocation().state[0];
-    const items = useLocation().state[1];
+    const { clearCart } = useContext(ProductContext)
+    const total = useLocation().state[0]
+    const items = useLocation().state[1]
+    const [order, setOrder] = useState()
+
+    useEffect(() => {
+        createOrder()
+        addItems()
+        clearCart()
+    }, [])
+
+    const createOrder = () => {
+        const userID = localStorage.getItem('userID') || 1
+		const my_order = {
+			"userID": userID,
+			"total_cost": total,
+			"paid": true
+		}
+
+        axios
+            .post('/api/order', my_order)
+            .then(res => {
+                setOrder(res.data[0])
+            })
+            .catch(err => console.log(err))
+    }
+    const addItems = () => {
+		items.forEach(item => {
+			
+			const ordered_item = {
+				"order": order,
+				"inventory_sku": item.id,
+				"quantity_ordered": 1
+			}
+
+			axios
+				.post('/api/ordered_item/', ordered_item)
+				.then(res => console.log(res.data))
+				.catch(err => console.log(err))
+		})
+	}
 
     const salesTax = () => {
         return (total * .047).toFixed(2)

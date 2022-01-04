@@ -21,14 +21,16 @@ function App() {
 	const [cart, setCart] = useState([])
 	const [user, setUser] = useState([])
 	const [error, setError] = useState()
+	const [loggedIn, setLoggedIn] = useState(false)
 
-	// const api = process.env.REACT_APP_API || ''
+	const api = process.env.REACT_APP_API || ''
 
 	useEffect(() => {
 		axios
-			.get("/api/inventory/")
+			.get(api + "/api/inventory/")
 			.then(res => {
 				setProducts(res.data)
+				setError()
 			})
 			.catch(() => {
 				setError("Error when loading books")
@@ -52,10 +54,12 @@ function App() {
 
 	const logout = () => {
 		axios
-			.get("/api/user/logout")
+			.get(api + "/api/user/logout")
 			.then(() => {
-				setUser([])
+				setUser([{status:"off"}])
 				localStorage.clear()
+				setError()
+				setLoggedIn(false)
 			})
 			.catch(() => {
 				setError('Error during logout, please re-load and try again')
@@ -64,7 +68,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<UserContext.Provider value={{ user, setUser, logout }}>
+			<UserContext.Provider value={{ user, loggedIn, setLoggedIn, setUser, logout }}>
 				<ProductContext.Provider value = {{ products, addItem, removeItem, clearCart }}>
 					<CartContext.Provider value = {cart}>
 						<Navigation />

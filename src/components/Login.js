@@ -7,9 +7,9 @@ import { UserContext } from '../contexts/UserContext'
 
 
 const Login = () => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, setLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
-  // const api = process.env.REACT_APP_API || ''
+  const api = process.env.REACT_APP_API || ''
 
   const defaultState = {
     username: "",
@@ -48,7 +48,7 @@ const Login = () => {
     let loginAttempt = { username: formState.username, password: formState.password }
     
     axios
-      .post("/api/user/login", loginAttempt)
+      .post(api + "/api/user/login", loginAttempt)
       .then((res) => {
         const data = res.data
 
@@ -59,6 +59,7 @@ const Login = () => {
         setUser(localStorage.getItem("name"))
         navigate("/")
 
+        setLoggedIn(true)
         setFormState(defaultState) 
       })
 

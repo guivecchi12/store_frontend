@@ -1,29 +1,39 @@
 .order_history{
     padding-top: 100px;
     text-align: center;
+
     h1{
         font-size: xx-large;
     }
+
     h3{
         font-size: large;
     }
-    .no_orders{
-        margin-top:10%;
-        font-size: 1.2em;
-        text-align: center;
-    }
+
     .orders{
         margin:20px;
         display: flex;
         flex-wrap: wrap;
-        text-align: start;        
+        text-align: start;
+        
+        .no_orders{
+            margin-top:10%;
+            font-size: 1.2em;
+            width: 100%;
+            text-align: center;
+        }
     }
+
     .order{
         width: 30%;
         padding: 10px;
         margin: 20px;
-
         border: 1px solid black;
+
+        @media(max-width: 930px){
+            width: 100%;
+        }
+        
         #order_num{
             font-style: italic;
             font-size: 1.2em;

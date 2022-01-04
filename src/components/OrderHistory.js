@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import data from '../data'
+import { UserContext } from '../contexts/UserContext'
 const Orders = () => {
     const [orders, setOrders] = useState([])
     const [error, setError] = useState({})
+    const { loggedIn } = useContext(UserContext);
 
-    // const api = process.env.REACT_APP_API || ''
-
-    
+    const api = process.env.REACT_APP_API || ''
 
     useEffect(() => {
-		axios
-			.get('/api/ordered_item/user')
+        if(loggedIn){
+            axios
+			.get(api + '/api/ordered_item/user')
             .then(res => {
                 organizeOrders(res.data)
-                // console.log("*** ORDERS ***", orders)
+                setError({})
             })
             .catch(err => {
                 setError({error: err, message: 'No orders have been found'})
             })
-        // organizeOrders(data)
-	}, [])
+        }
+        else{
+            setError({message: "Please login to see your order history"})
+        }
+	}, [loggedIn])
 
     const organizeOrders = (data) => {
         const organized = {}
