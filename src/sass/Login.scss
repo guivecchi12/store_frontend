@@ -9,12 +9,14 @@
     
     .form{
         height:80%;
-        padding: 20px;
-        background-color: rgba(250, 234, 234, 0.048);
+        padding: 5px 30px;
+        background-color: rgba(39, 36, 36, 0.039);
 
         border-style:solid;
         border-color: black;
         border-width: 2px;
+        border-radius: 5%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         display: flex;
         flex-direction: column;
@@ -36,16 +38,34 @@
             display:flex;
             flex-direction: column;
             justify-content: space-between;
+            .myFlex{
+                display:flex;
+                flex-direction: column;
+                .label{
+                    margin-bottom: 5px;
+                }
+            }
 
             .terms{
                 button{
-                    margin-left: 20px;
+                    margin-left: 10px;
                 }
             }
-        }
-        
-        input{
-           margin-left: 5px; 
+
+            .submit{
+                background-color: rgb(42, 42, 187);
+                color:white;
+                padding:5px;
+                border-radius: 10px;
+            }
+            .submit:hover{
+                cursor: pointer;
+            }
+
+            .submit:disabled{
+                background:gray;
+                cursor: auto;
+            }
         }
     }    
 }
